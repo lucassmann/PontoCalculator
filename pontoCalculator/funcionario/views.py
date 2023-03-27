@@ -1,15 +1,17 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from funcionario.forms import CustomUserCreationForm
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 
 
-@login_required
-@user_passes_test(lambda u: u.is_superuser)
+# @login_required
+# @user_passes_test(lambda u: u.is_superuser)
 def register_view(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied(
+            "You need administrator permissions to register a user.")
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -25,7 +27,8 @@ def register_view(request):
                 messages.error(request, 'Invalid username or password')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form': form})
+    # return render(request, 'register.html', {'form': form})
+    return redirect('/')
 
 
 def login_view(request):
