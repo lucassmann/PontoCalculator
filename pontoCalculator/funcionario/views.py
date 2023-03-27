@@ -3,8 +3,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from funcionario.forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import PermissionDenied
 
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -16,7 +20,7 @@ def register_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Account created for {username}!')
-                return redirect('home')
+                return redirect('/')
             else:
                 messages.error(request, 'Invalid username or password')
     else:
@@ -38,4 +42,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('/')
