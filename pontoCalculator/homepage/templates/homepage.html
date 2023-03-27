@@ -4,7 +4,11 @@
     <title>Homepage</title>
 </head>
 <body>
-    <h1>Welcome to the Homepage</h1>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ username }}!</p>
+{% else %}
+    <p>Welcome to the homepage!</p>
+{% endif %}
     <p>Click on the links below to register, login or logout:</p>
     <ul>
         <li><a href="{% url 'register' %}">Register</a></li>
