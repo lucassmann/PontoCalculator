@@ -6,8 +6,6 @@ from funcionario.forms import CustomUserCreationForm
 from django.core.exceptions import PermissionDenied
 
 
-# @login_required
-# @user_passes_test(lambda u: u.is_superuser)
 def register_view(request):
     if not request.user.is_superuser:
         raise PermissionDenied(
