@@ -27,8 +27,7 @@ def register_view(request):
                 messages.error(request, 'Invalid username or password')
     else:
         form = CustomUserCreationForm()
-    # return render(request, 'register.html', {'form': form})
-    return redirect('/')
+    return render(request, 'register.html', {'form': form})
 
 
 def login_view(request):
