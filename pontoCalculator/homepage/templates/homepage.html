@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ username }}!</p>
+{% else %}
+    <p>Welcome to the homepage!</p>
+{% endif %}
+    <p>Click on the links below to register, login or logout:</p>
+    <ul>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</body>
+</html>
