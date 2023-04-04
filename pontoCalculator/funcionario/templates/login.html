@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Login
+Login
 {% endblock %}
 
 {% block head%}
-    <link
+<link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
-  />
+    />
 {% endblock %}
 
 {% block content %}
 <div style="margin-top: 50px" class="ui container">
-<h1 class="ui center aligned header">Login</h1>
+    <h1 class="ui center aligned header">Login</h1>
     <h2>Login</h2>
     <form class="ui form" method="post">
         {% csrf_token %}
