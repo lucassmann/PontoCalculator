@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Tabela de Ponto</title>
-</head>
-<style>
+    <head>
+        <title>Tabela de Ponto</title>
+    </head>
+    <style>
     /* Adicione aqui o estilo CSS */
     body {
         display: flex;
@@ -69,109 +69,118 @@
         margin-top: 16px;
     }
 </style>
+    <body>
 
-<body>
+        <h1>Tabela de Ponto</h1>
 
-    <h1>Tabela de Ponto</h1>
 
-    
 
-    <table>
-        <thead>
-            <tr>
-                <th>Dia da semana</th>
-                <th>Data</th>
-                <th>Entrada 1</th>
-                <th>Saída 1</th>
-                <th>Entrada 2</th>
-                <th>Saída 2</th>
-                <th>Horas Trabalhadas</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Segunda-feira</td>
-                <td id="monDate"></td>
-                <td><input type="time" id="monIn1"></td>
-                <td><input type="time" id="monOut1"></td>
-                <td><input type="time" id="monIn2"></td>
-                <td><input type="time" id="monOut2"></td>
-                <td id="monTotal"></td>
-            </tr>
-            <tr>
-                <td>Terça-feira</td>
-                <td id="tueDate"></td>
-                <td><input type="time" id="tueIn1"></td>
-                <td><input type="time" id="tueOut1"></td>
-                <td><input type="time" id="tueIn2"></td>
-                <td><input type="time" id="tueOut2"></td>
-                <td id="tueTotal"></td>
-            </tr>
-            <tr>
-                <td>Quarta-feira</td>
-                <td id="wedDate"></td>
-                <td><input type="time" id="wedIn1"></td>
-                <td><input type="time" id="wedOut1"></td>
-                <td><input type="time" id="wedIn2"></td>
-                <td><input type="time" id="wedOut2"></td>
-                <td id="wedTotal"></td>
-            </tr>
-            <tr>
-                <td>Quinta-feira</td>
-                <td id="thuDate"></td>
-                <td><input type="time" id="thuIn1"></td>
-                <td><input type="time" id="thuOut1"></td>
-                <td><input type="time" id="thuIn2"></td>
-                <td><input type="time" id="thuOut2"></td>
-                <td id="thuTotal"></td>
-            </tr>
-            <tr>
-                <td>Sexta-feira</td>
-                <td id="friDate"></td>
-                <td><input type="time" id="friIn1"></td>
-                <td><input type="time" id="friOut1"></td>
-                <td><input type="time" id="friIn2"></td>
-                <td><input type="time" id="friOut2"></td>
-                <td id="friTotal"></td>
-            </tr>
-            <tr>
-                <td>Sábado</td>
-                <td id="satDate"></td>
-                <td><input type="time" id="satIn1"></td>
-                <td><input type="time" id="satOut1"></td>
-                <td><input type="time" id="satIn2"></td>
-                <td><input type="time" id="satOut2"></td>
-                <td id="satTotal"></td>
-            </tr>
-            <tr>
-                <td>Domingo</td>
-                <td id="sunDate"></td>
-                <td><input type="time" id="sunIn1"></td>
-                <td><input type="time" id="sunOut1"></td>
-                <td><input type="time" id="sunIn2"></td>
-                <td><input type="time" id="sunOut2"></td>
-                <td id="sunTotal"></td>
-            </tr>
-            <tr>
-                <td>Total da semana</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td id="weekTotal"></td>
-            </tr>
-        </tbody>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dia da semana</th>
+                    <th>Data</th>
+                    <th>Entrada 1</th>
+                    <th>Saída 1</th>
+                    <th>Entrada 2</th>
+                    <th>Saída 2</th>
+                    <th>Saída estimada</th>
+                    <th>Horas Trabalhadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Segunda-feira</td>
+                    <td id="monDate"></td>
+                    <td><input type="time" id="monIn1"></td>
+                    <td><input type="time" id="monOut1"></td>
+                    <td><input type="time" id="monIn2"></td>
+                    <td><input type="time" id="monOut2"></td>
+                    <td id="monEndShift"></td>
+                    <td id="monTotal"></td>
+                </tr>
+                <tr>
+                    <td>Terça-feira</td>
+                    <td id="tueDate"></td>
+                    <td><input type="time" id="tueIn1"></td>
+                    <td><input type="time" id="tueOut1"></td>
+                    <td><input type="time" id="tueIn2"></td>
+                    <td><input type="time" id="tueOut2"></td>
+                    <td id="tueEndShift"></td>
+                    <td id="tueTotal"></td>
+                </tr>
+                <tr>
+                    <td>Quarta-feira</td>
+                    <td id="wedDate"></td>
+                    <td><input type="time" id="wedIn1"></td>
+                    <td><input type="time" id="wedOut1"></td>
+                    <td><input type="time" id="wedIn2"></td>
+                    <td><input type="time" id="wedOut2"></td>
+                    <td id="wedEndShift"></td>
+                    <td id="wedTotal"></td>
+                </tr>
+                <tr>
+                    <td>Quinta-feira</td>
+                    <td id="thuDate"></td>
+                    <td><input type="time" id="thuIn1"></td>
+                    <td><input type="time" id="thuOut1"></td>
+                    <td><input type="time" id="thuIn2"></td>
+                    <td><input type="time" id="thuOut2"></td>
+                    <td id="thuEndShift"></td>
+                    <td id="thuTotal"></td>
+                </tr>
+                <tr>
+                    <td>Sexta-feira</td>
+                    <td id="friDate"></td>
+                    <td><input type="time" id="friIn1"></td>
+                    <td><input type="time" id="friOut1"></td>
+                    <td><input type="time" id="friIn2"></td>
+                    <td><input type="time" id="friOut2"></td>
+                    <td id="friEndShift"></td>
+                    <td id="friTotal"></td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td id="satDate"></td>
+                    <td><input type="time" id="satIn1"></td>
+                    <td><input type="time" id="satOut1"></td>
+                    <td><input type="time" id="satIn2"></td>
+                    <td><input type="time" id="satOut2"></td>
+                    <td id="satEndShift"></td>
+                    <td id="satTotal"></td>
+                </tr>
+                <tr>
+                    <td>Domingo</td>
+                    <td id="sunDate"></td>
+                    <td><input type="time" id="sunIn1"></td>
+                    <td><input type="time" id="sunOut1"></td>
+                    <td><input type="time" id="sunIn2"></td>
+                    <td><input type="time" id="sunOut2"></td>
+                    <td id="sunEndShift"></td>
+                    <td id="sunTotal"></td>
 
-    </table>
-    <br/>
-    <br/>
-    <div>
-        <button onclick="previousWeek()">Semana Anterior</button>
-        <button onclick="nextWeek()">Próxima Semana</button>
-        <button onclick="saveTable()">Salvar</button>
-    </div>
-    <script>
+                </tr>
+                <tr>
+                    <td>Total da semana</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="weekTotal"></td>
+                </tr>
+            </tbody>
+
+        </table>
+        <br/>
+            <br/>
+                <div>
+                    <button onclick="previousWeek()">Semana Anterior</button>
+                    <button onclick="nextWeek()">Próxima Semana</button>
+                    <button onclick="saveTable()">Salvar</button>
+                </div>
+                <script>
 
         // Armazena a data da segunda-feira da semana atual
         let currentDate = new Date();
@@ -256,6 +265,7 @@
             currentWeekMonday.setDate(currentWeekMonday.getDate() + 7);
             displayDates();
             calculateHours();
+            calculateRemainingShiftHours();
         }
 
         // Função para voltar para a semana anterior
@@ -321,7 +331,55 @@
             form.submit(); // Envia o formulário
         }
 
+        function calculateRemainingShiftHours(){
+            let monHours = calculateShiftHours("monIn1", "monOut1", "monIn2", "monOut2");
+            document.getElementById("monEndShift").textContent = monHours;
+            let tueHours = calculateShiftHours("tueIn1", "tueOut1", "tueIn2", "tueOut2");
+            document.getElementById("tueEndShift").textContent = tueHours;
+            let wedHours = calculateShiftHours("wedIn1", "wedOut1", "wedIn2", "wedOut2");
+            document.getElementById("wedEndShift").textContent = wedHours;
+            let thuHours = calculateShiftHours("thuIn1", "thuOut1", "thuIn2", "thuOut2");
+            document.getElementById("thuEndShift").textContent = thuHours;
+            let friHours = calculateShiftHours("friIn1", "friOut1", "friIn2", "friOut2");
+            document.getElementById("friEndShift").textContent = friHours;
 
+            // Calcula as horas trabalhadas no sábado e domingo
+            let satHours = calculateShiftHours("satIn1", "satOut1", "satIn2", "satOut2");
+            document.getElementById("satEndShift").textContent = satHours;
+            let sunHours = calculateShiftHours("sunIn1", "sunOut1", "sunIn2", "sunOut2");
+            document.getElementById("sunEndShift").textContent = sunHours;
+        }
+
+        function calculateShiftHours(in1, out1, in2, out2) {
+            defaultShiftHours = 8;
+            let in1Time = getTimeValue(document.getElementById(in1).value);
+            let out1Time =getTimeValue(document.getElementById(out1).value);
+            let in2Time = getTimeValue(document.getElementById(in2).value);
+            let out2Time =getTimeValue(document.getElementById(out2).value);
+
+            // Verifica se os campos de entrada e saída foram preenchidos corretamente
+            if (in1Time === null) {
+                return null;
+            } else if (in2Time == null) { 
+                const dateAux = new Date(in1Time);
+                dateAux.setHours(in1Time.getHours() + 8);
+                const expectedOutDateString = dateAux.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) +':' + dateAux.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+                return expectedOutDateString;
+                // Se não houver segundo período, retorna as horas do primeiro período
+            } else {
+                //do the thing
+                const dateAux = new Date(in1Time);
+                const intervaloHours = in2Time.getHours() - out1Time.getHours();
+                const intervaloMinutes = in2Time.getMinutes() - out1Time.getMinutes();
+                console.log(intervaloHours + ':' +intervaloMinutes);
+                dateAux.setHours(in1Time.getHours() + 8 + intervaloHours);
+                dateAux.setMinutes(in1Time.getMinutes() + intervaloMinutes);
+                console.log('data'+dateAux);
+                const expectedOutDateString = dateAux.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) +':' + dateAux.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+                return expectedOutDateString;
+            }
+        }
+        
         // Exibe as datas da semana atual na tabela
         displayDates();
 
@@ -329,6 +387,5 @@
         calculateHours();
 
     </script>
-</body>
-
-</html>
+            </body>
+        </html>
