@@ -22,18 +22,28 @@
             <div class="ui inverted vertical masthead center aligned segment">
                 <div class="ui container">
                     <div class="ui large secondary inverted pointing menu">
-                        <a class="active item">Home</a>
+                        {% block homeActive %}
+                        <a class="active item" href="{% url 'homepage' %}">Home</a>
+                        {% endblock %}
                         {% if not user.is_authenticated %}
+                        {% block loginActive %}
                         <a class="item" href="{% url 'login' %}">Login</a>
+                        {% endblock %}
                         {% else %}
+                        {% block logout %}
                         <a class="item" href="{% url 'logout' %}">Logout</a>
+                        {% endblock %}
                         {% endif %}
                         {% if user.is_superuser %}
+                        {% block registerActive %}
                         <a class="item" href="{% url 'register' %}">Register</a>
+                        {% endblock %}
                         {% endif %}
                         {% if user.is_authenticated %}
+                        {% block pontoActive %}
                         <a class="item" href="{% url 'ponto' %}">Ponto
                             Eletrônico</a>
+                        {% endblock %}
                         {% endif %}
                     </div>
                 </div>

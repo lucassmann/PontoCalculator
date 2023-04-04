@@ -11,6 +11,12 @@ Login
     />
 {% endblock %}
 
+{% block homeActive %}
+<a class="item" href="{% url 'homepage' %}">Home</a>
+{% endblock %}
+{% block loginActive %}
+<a class="active item" href="{% url 'login' %}">Login</a>
+{% endblock %}
 {% block content %}
 <div style="margin-top: 50px" class="ui container">
     <h1 class="ui center aligned header">Ponto Calculator</h1>
