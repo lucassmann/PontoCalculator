@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Tabela de Ponto</title>
+    </head>
+    <style>
+    /* Adicione aqui o estilo CSS */
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    .table-container {
+        margin: 32px auto;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        padding: 8px;
+        text-align: center;
+        background-color: #4F4F4F;
+        color: white;
+        border: 1px solid #ddd;
+    }
+
+    button {
+        border-radius: 5px;
+        border: none;
+        padding: 8px 16px;
+        background-color: #4F4F4F;
+        color: white;
+        cursor: pointer;
+    }
+
+    #save-button {
+        border-radius: 5px;
+        border: none;
+        padding: 8px 16px;
+        background-color: #008CBA;
+        color: white;
+        cursor: pointer;
+        margin-top: 16px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+    }
+</style>
+    <body>
+
+        <h1>Tabela de Ponto</h1>
+
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Dia da semana</th>
+                    <th>Data</th>
+                    <th>Entrada 1</th>
+                    <th>Saída 1</th>
+                    <th>Entrada 2</th>
+                    <th>Saída 2</th>
+                    <th>Saída estimada</th>
+                    <th>Horas Trabalhadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Segunda-feira</td>
+                    <td id="monDate"></td>
+                    <td><input type="time" id="monIn1"></td>
+                    <td><input type="time" id="monOut1"></td>
+                    <td><input type="time" id="monIn2"></td>
+                    <td><input type="time" id="monOut2"></td>
+                    <td id="monEndShift"></td>
+                    <td id="monTotal"></td>
+                </tr>
+                <tr>
+                    <td>Terça-feira</td>
+                    <td id="tueDate"></td>
+                    <td><input type="time" id="tueIn1"></td>
+                    <td><input type="time" id="tueOut1"></td>
+                    <td><input type="time" id="tueIn2"></td>
+                    <td><input type="time" id="tueOut2"></td>
+                    <td id="tueEndShift"></td>
+                    <td id="tueTotal"></td>
+                </tr>
+                <tr>
+                    <td>Quarta-feira</td>
+                    <td id="wedDate"></td>
+                    <td><input type="time" id="wedIn1"></td>
+                    <td><input type="time" id="wedOut1"></td>
+                    <td><input type="time" id="wedIn2"></td>
+                    <td><input type="time" id="wedOut2"></td>
+                    <td id="wedEndShift"></td>
+                    <td id="wedTotal"></td>
+                </tr>
+                <tr>
+                    <td>Quinta-feira</td>
+                    <td id="thuDate"></td>
+                    <td><input type="time" id="thuIn1"></td>
+                    <td><input type="time" id="thuOut1"></td>
+                    <td><input type="time" id="thuIn2"></td>
+                    <td><input type="time" id="thuOut2"></td>
+                    <td id="thuEndShift"></td>
+                    <td id="thuTotal"></td>
+                </tr>
+                <tr>
+                    <td>Sexta-feira</td>
+                    <td id="friDate"></td>
+                    <td><input type="time" id="friIn1"></td>
+                    <td><input type="time" id="friOut1"></td>
+                    <td><input type="time" id="friIn2"></td>
+                    <td><input type="time" id="friOut2"></td>
+                    <td id="friEndShift"></td>
+                    <td id="friTotal"></td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td id="satDate"></td>
+                    <td><input type="time" id="satIn1"></td>
+                    <td><input type="time" id="satOut1"></td>
+                    <td><input type="time" id="satIn2"></td>
+                    <td><input type="time" id="satOut2"></td>
+                    <td id="satEndShift"></td>
+                    <td id="satTotal"></td>
+                </tr>
+                <tr>
+                    <td>Domingo</td>
+                    <td id="sunDate"></td>
+                    <td><input type="time" id="sunIn1"></td>
+                    <td><input type="time" id="sunOut1"></td>
+                    <td><input type="time" id="sunIn2"></td>
+                    <td><input type="time" id="sunOut2"></td>
+                    <td id="sunEndShift"></td>
+                    <td id="sunTotal"></td>
+
+                </tr>
+                <tr>
+                    <td>Total da semana</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="weekTotal"></td>
+                </tr>
+            </tbody>
+
+        </table>
+        <br/>
+            <br/>
+                <div>
+                    <button onclick="previousWeek()">Semana Anterior</button>
+                    <button onclick="nextWeek()">Próxima Semana</button>
+                    <button onclick="saveTable()">Salvar</button>
+                </div>
+                <script>
+
+        // Armazena a data da segunda-feira da semana atual
+        let currentDate = new Date();
+        let currentWeekMonday = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay() + 1);
+
+        // Função para exibir a data de cada dia da semana na tabela
+        function displayDates() {
+            document.getElementById("monDate").textContent = currentWeekMonday.toLocaleDateString();
+            document.getElementById("tueDate").textContent = new Date(currentWeekMonday.getTime() + (24 * 60 * 60 * 1000)).toLocaleDateString();
+            document.getElementById("wedDate").textContent = new Date(currentWeekMonday.getTime() + (24 * 60 * 60 * 1000 * 2)).toLocaleDateString();
+            document.getElementById("thuDate").textContent = new Date(currentWeekMonday.getTime() + (24 * 60 * 60 * 1000 * 3)).toLocaleDateString();
+            document.getElementById("friDate").textContent = new Date(currentWeekMonday.getTime() + (24 * 60 * 60 * 1000 * 4)).toLocaleDateString();
+            document.getElementById("satDate").textContent = new Date(currentWeekMonday.getTime() + (24 * 60 * 60 * 1000 * 5)).toLocaleDateString();
+            document.getElementById("sunDate").textContent = new Date(currentWeekMonday.getTime() + (24 * 60 * 60 * 1000 * 6)).toLocaleDateString();
+        }
+
+        // Função para calcular as horas trabalhadas em cada dia da semana e o total da semana
+        function calculateHours() {
+            // Calcula as horas trabalhadas de segunda a sexta-feira
+            let monHours = calculateDayHours("monIn1", "monOut1", "monIn2", "monOut2");
+            document.getElementById("monTotal").textContent = monHours.toFixed(2);
+            let tueHours = calculateDayHours("tueIn1", "tueOut1", "tueIn2", "tueOut2");
+            document.getElementById("tueTotal").textContent = tueHours.toFixed(2);
+            let wedHours = calculateDayHours("wedIn1", "wedOut1", "wedIn2", "wedOut2");
+            document.getElementById("wedTotal").textContent = wedHours.toFixed(2);
+            let thuHours = calculateDayHours("thuIn1", "thuOut1", "thuIn2", "thuOut2");
+            document.getElementById("thuTotal").textContent = thuHours.toFixed(2);
+            let friHours = calculateDayHours("friIn1", "friOut1", "friIn2", "friOut2");
+            document.getElementById("friTotal").textContent = friHours.toFixed(2);
+
+            // Calcula as horas trabalhadas no sábado e domingo
+            let satHours = calculateDayHours("satIn1", "satOut1", "satIn2", "satOut2");
+            document.getElementById("satTotal").textContent = satHours.toFixed(2);
+            let sunHours = calculateDayHours("sunIn1", "sunOut1", "sunIn2", "sunOut2");
+            document.getElementById("sunTotal").textContent = sunHours.toFixed(2);
+
+            // Calcula o total de horas trabalhadas na semana
+            let weekHours = monHours + tueHours + wedHours + thuHours + friHours + satHours + sunHours;
+            document.getElementById("weekTotal").textContent = weekHours.toFixed(2);
+        }
+
+        // Função para calcular as horas trabalhadas em um dia
+        function calculateDayHours(in1, out1, in2, out2) {
+            let in1Time = getTimeValue(document.getElementById(in1).value);
+            let out1Time = getTimeValue(document.getElementById(out1).value);
+            let in2Time = getTimeValue(document.getElementById(in2).value);
+            let out2Time = getTimeValue(document.getElementById(out2).value);
+
+            // Verifica se os campos de entrada e saída foram preenchidos corretamente
+            if (in1Time === null || out1Time === null) {
+                return 0;
+            }
+
+            // Calcula as horas trabalhadas no primeiro período
+            let hours1 = (out1Time.getTime() - in1Time.getTime()) / (1000 * 60 * 60);
+            if (in2Time === null || out2Time === null) {
+                // Se não houver segundo período, retorna as horas do primeiro período
+                return hours1;
+            } else {
+                // Calcula as horas trabalhadas no segundo período
+                let hours2 = (out2Time.getTime() - in2Time.getTime()) / (1000 * 60 * 60);
+                // Retorna a soma das horas dos dois períodos
+                return hours1 + hours2;
+            }
+        }
+
+        // Função para converter um valor de hora em um objeto Date
+        function getTimeValue(timeString) {
+            if (timeString === "") {
+                return null;
+            }
+            let parts = timeString.split(":");
+            let hours = parseInt(parts[0]);
+            let minutes = parseInt(parts[1]);
+            let timeValue = new Date();
+            timeValue.setHours(hours, minutes, 0, 0);
+            return timeValue;
+        }
+
+        // Função para avançar para a próxima semana
+        function nextWeek() {
+            currentWeekMonday.setDate(currentWeekMonday.getDate() + 7);
+            displayDates();
+            calculateHours();
+            calculateRemainingShiftHours();
+        }
+
+        // Função para voltar para a semana anterior
+        function previousWeek() {
+            currentWeekMonday.setDate(currentWeekMonday.getDate() - 7);
+            displayDates();
+            calculateHours();
+        }
+
+        function saveTable(){
+            currentWeekMonday.setDate(currentWeekMonday.getDate());
+            displayDates();
+            calculateHours();
+            calculateRemainingShiftHours();
+        }
+        //save to db funcionality to be added
+        // function saveTable() {
+        //     const form = document.createElement("form");
+        //     form.action = "#"; // Define a ação do formulário como "#" para não redirecionar a outra página
+        //     form.method = "post"; // Define o método HTTP como POST
+
+        //     const tableData = document.getElementById("table-data");
+
+        //     // Adiciona os inputs dos dados da tabela ao formulário
+        //     for (let i = 0; i < tableData.rows.length; i++) {
+        //         const row = tableData.rows[i];
+        //         const date = row.cells[0].innerText;
+        //         const input1 = row.cells[1].querySelector("input");
+        //         const input2 = row.cells[2].querySelector("input");
+        //         const input3 = row.cells[3].querySelector("input");
+        //         const input4 = row.cells[4].querySelector("input");
+
+        //         const inputDate = document.createElement("input");
+        //         inputDate.type = "hidden";
+        //         inputDate.name = `data-${i}`;
+        //         inputDate.value = date;
+        //         form.appendChild(inputDate);
+
+        //         const input1Value = input1.value === "" ? "00:00" : input1.value;
+        //         const input2Value = input2.value === "" ? "00:00" : input2.value;
+        //         const input3Value = input3.value === "" ? "00:00" : input3.value;
+        //         const input4Value = input4.value === "" ? "00:00" : input4.value;
+
+        //         const input1Element = document.createElement("input");
+        //         input1Element.type = "hidden";
+        //         input1Element.name = `entrada1-${i}`;
+        //         input1Element.value = input1Value;
+        //         form.appendChild(input1Element);
+
+        //         const input2Element = document.createElement("input");
+        //         input2Element.type = "hidden";
+        //         input2Element.name = `saida1-${i}`;
+        //         input2Element.value = input2Value;
+        //         form.appendChild(input2Element);
+
+        //         const input3Element = document.createElement("input");
+        //         input3Element.type = "hidden";
+        //         input3Element.name = `entrada2-${i}`;
+        //         input3Element.value = input3Value;
+        //         form.appendChild(input3Element);
+
+        //         const input4Element = document.createElement("input");
+        //         input4Element.type = "hidden";
+        //         input4Element.name = `saida2-${i}`;
+        //         input4Element.value = input4Value;
+        //         form.appendChild(input4Element);
+        //     }
+
+        //     document.body.appendChild(form); // Adiciona o formulário ao corpo da página
+        //     form.submit(); // Envia o formulário
+        // }
+
+        function calculateRemainingShiftHours(){
+            let monHours = calculateShiftHours("monIn1", "monOut1", "monIn2", "monOut2");
+            document.getElementById("monEndShift").textContent = monHours;
+            let tueHours = calculateShiftHours("tueIn1", "tueOut1", "tueIn2", "tueOut2");
+            document.getElementById("tueEndShift").textContent = tueHours;
+            let wedHours = calculateShiftHours("wedIn1", "wedOut1", "wedIn2", "wedOut2");
+            document.getElementById("wedEndShift").textContent = wedHours;
+            let thuHours = calculateShiftHours("thuIn1", "thuOut1", "thuIn2", "thuOut2");
+            document.getElementById("thuEndShift").textContent = thuHours;
+            let friHours = calculateShiftHours("friIn1", "friOut1", "friIn2", "friOut2");
+            document.getElementById("friEndShift").textContent = friHours;
+
+            // Calcula as horas trabalhadas no sábado e domingo
+            let satHours = calculateShiftHours("satIn1", "satOut1", "satIn2", "satOut2");
+            document.getElementById("satEndShift").textContent = satHours;
+            let sunHours = calculateShiftHours("sunIn1", "sunOut1", "sunIn2", "sunOut2");
+            document.getElementById("sunEndShift").textContent = sunHours;
+        }
+
+        function calculateShiftHours(in1, out1, in2, out2) {
+            defaultShiftHours = 8;
+            let in1Time = getTimeValue(document.getElementById(in1).value);
+            let out1Time =getTimeValue(document.getElementById(out1).value);
+            let in2Time = getTimeValue(document.getElementById(in2).value);
+            let out2Time =getTimeValue(document.getElementById(out2).value);
+
+            // Verifica se os campos de entrada e saída foram preenchidos corretamente
+            if (in1Time === null) {
+                return null;
+            } else if (in2Time == null) { 
+                const dateAux = new Date(in1Time);
+                dateAux.setHours(in1Time.getHours() + 8);
+                const expectedOutDateString = dateAux.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) +':' + dateAux.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+                return expectedOutDateString;
+                // Se não houver segundo período, retorna as horas do primeiro período
+            } else {
+                //do the thing
+                const dateAux = new Date(in1Time);
+                const intervaloHours = in2Time.getHours() - out1Time.getHours();
+                const intervaloMinutes = in2Time.getMinutes() - out1Time.getMinutes();
+                dateAux.setHours(in1Time.getHours() + 8 + intervaloHours);
+                dateAux.setMinutes(in1Time.getMinutes() + intervaloMinutes);
+                const expectedOutDateString = dateAux.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) +':' + dateAux.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+                return expectedOutDateString;
+            }
+        }
+        
+        // Exibe as datas da semana atual na tabela
+        displayDates();
+
+        // Calcula as horas trabalhadas da semana atual
+        calculateHours();
+
+    </script>
+            </body>
+        </html>

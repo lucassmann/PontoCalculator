@@ -1,24 +1,42 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Login
+Login
 {% endblock %}
 
 {% block head%}
-    <link
+<link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
-  />
+    />
 {% endblock %}
 
+{% block homeActive %}
+<a class="item" href="{% url 'homepage' %}">Home</a>
+{% endblock %}
+{% block loginActive %}
+<a class="active item" href="{% url 'login' %}">Login</a>
+{% endblock %}
 {% block content %}
 <div style="margin-top: 50px" class="ui container">
-<h1 class="ui center aligned header">Login</h1>
+    <h1 class="ui center aligned header">Ponto Calculator</h1>
     <h2>Login</h2>
     <form class="ui form" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="envelope icon"></i>
+                {{ form.username }}
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+                {{ form.password }}
+            </div>
+        </div>
         <button class="ui blue button" type="submit">Login</button>
     </form>
 </div>
+
 {% endblock %}
