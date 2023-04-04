@@ -275,61 +275,68 @@
             calculateHours();
         }
 
-        function saveTable() {
-            const form = document.createElement("form");
-            form.action = "#"; // Define a ação do formulário como "#" para não redirecionar a outra página
-            form.method = "post"; // Define o método HTTP como POST
-
-            const tableData = document.getElementById("table-data");
-
-            // Adiciona os inputs dos dados da tabela ao formulário
-            for (let i = 0; i < tableData.rows.length; i++) {
-                const row = tableData.rows[i];
-                const date = row.cells[0].innerText;
-                const input1 = row.cells[1].querySelector("input");
-                const input2 = row.cells[2].querySelector("input");
-                const input3 = row.cells[3].querySelector("input");
-                const input4 = row.cells[4].querySelector("input");
-
-                const inputDate = document.createElement("input");
-                inputDate.type = "hidden";
-                inputDate.name = `data-${i}`;
-                inputDate.value = date;
-                form.appendChild(inputDate);
-
-                const input1Value = input1.value === "" ? "00:00" : input1.value;
-                const input2Value = input2.value === "" ? "00:00" : input2.value;
-                const input3Value = input3.value === "" ? "00:00" : input3.value;
-                const input4Value = input4.value === "" ? "00:00" : input4.value;
-
-                const input1Element = document.createElement("input");
-                input1Element.type = "hidden";
-                input1Element.name = `entrada1-${i}`;
-                input1Element.value = input1Value;
-                form.appendChild(input1Element);
-
-                const input2Element = document.createElement("input");
-                input2Element.type = "hidden";
-                input2Element.name = `saida1-${i}`;
-                input2Element.value = input2Value;
-                form.appendChild(input2Element);
-
-                const input3Element = document.createElement("input");
-                input3Element.type = "hidden";
-                input3Element.name = `entrada2-${i}`;
-                input3Element.value = input3Value;
-                form.appendChild(input3Element);
-
-                const input4Element = document.createElement("input");
-                input4Element.type = "hidden";
-                input4Element.name = `saida2-${i}`;
-                input4Element.value = input4Value;
-                form.appendChild(input4Element);
-            }
-
-            document.body.appendChild(form); // Adiciona o formulário ao corpo da página
-            form.submit(); // Envia o formulário
+        function saveTable(){
+            currentWeekMonday.setDate(currentWeekMonday.getDate());
+            displayDates();
+            calculateHours();
+            calculateRemainingShiftHours();
         }
+        //save to db funcionality to be added
+        // function saveTable() {
+        //     const form = document.createElement("form");
+        //     form.action = "#"; // Define a ação do formulário como "#" para não redirecionar a outra página
+        //     form.method = "post"; // Define o método HTTP como POST
+
+        //     const tableData = document.getElementById("table-data");
+
+        //     // Adiciona os inputs dos dados da tabela ao formulário
+        //     for (let i = 0; i < tableData.rows.length; i++) {
+        //         const row = tableData.rows[i];
+        //         const date = row.cells[0].innerText;
+        //         const input1 = row.cells[1].querySelector("input");
+        //         const input2 = row.cells[2].querySelector("input");
+        //         const input3 = row.cells[3].querySelector("input");
+        //         const input4 = row.cells[4].querySelector("input");
+
+        //         const inputDate = document.createElement("input");
+        //         inputDate.type = "hidden";
+        //         inputDate.name = `data-${i}`;
+        //         inputDate.value = date;
+        //         form.appendChild(inputDate);
+
+        //         const input1Value = input1.value === "" ? "00:00" : input1.value;
+        //         const input2Value = input2.value === "" ? "00:00" : input2.value;
+        //         const input3Value = input3.value === "" ? "00:00" : input3.value;
+        //         const input4Value = input4.value === "" ? "00:00" : input4.value;
+
+        //         const input1Element = document.createElement("input");
+        //         input1Element.type = "hidden";
+        //         input1Element.name = `entrada1-${i}`;
+        //         input1Element.value = input1Value;
+        //         form.appendChild(input1Element);
+
+        //         const input2Element = document.createElement("input");
+        //         input2Element.type = "hidden";
+        //         input2Element.name = `saida1-${i}`;
+        //         input2Element.value = input2Value;
+        //         form.appendChild(input2Element);
+
+        //         const input3Element = document.createElement("input");
+        //         input3Element.type = "hidden";
+        //         input3Element.name = `entrada2-${i}`;
+        //         input3Element.value = input3Value;
+        //         form.appendChild(input3Element);
+
+        //         const input4Element = document.createElement("input");
+        //         input4Element.type = "hidden";
+        //         input4Element.name = `saida2-${i}`;
+        //         input4Element.value = input4Value;
+        //         form.appendChild(input4Element);
+        //     }
+
+        //     document.body.appendChild(form); // Adiciona o formulário ao corpo da página
+        //     form.submit(); // Envia o formulário
+        // }
 
         function calculateRemainingShiftHours(){
             let monHours = calculateShiftHours("monIn1", "monOut1", "monIn2", "monOut2");
