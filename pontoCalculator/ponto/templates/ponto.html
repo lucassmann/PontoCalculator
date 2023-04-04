@@ -378,10 +378,8 @@
                 const dateAux = new Date(in1Time);
                 const intervaloHours = in2Time.getHours() - out1Time.getHours();
                 const intervaloMinutes = in2Time.getMinutes() - out1Time.getMinutes();
-                console.log(intervaloHours + ':' +intervaloMinutes);
                 dateAux.setHours(in1Time.getHours() + 8 + intervaloHours);
                 dateAux.setMinutes(in1Time.getMinutes() + intervaloMinutes);
-                console.log('data'+dateAux);
                 const expectedOutDateString = dateAux.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) +':' + dateAux.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
                 return expectedOutDateString;
             }
