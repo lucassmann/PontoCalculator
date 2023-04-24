@@ -49,7 +49,7 @@ Criar Registro de Ponto
     
 </style>
     <div class="table-container">
-        <table class="registros-table">
+        <table class="ui celled table">
             <thead>
                 <tr>
                     <th>Tipo</th>
@@ -59,12 +59,12 @@ Criar Registro de Ponto
             <tbody>
                 {% for registro in registros %}
                 {% if forloop.counter|divisibleby:2 %}
-                <tr class=linha-saida>
+                <tr class="negative">
                     <td>Saída</td>
                     <td>{{ registro.data_hora }}</td>
                 </tr>
                 {% else %}
-                <tr class=linha-entrada>
+                <tr class="positve">
                     <td>Entrada</td>
                     <td>{{ registro.data_hora }}</td>
                 </tr>
