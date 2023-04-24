@@ -29,20 +29,20 @@ def ponto(request):
             
     if request.user.is_authenticated:
         registros = RegistroPonto.objects.filter(funcionario=request.user)
-        deltaSegundos = 0
-        entradas = []
-
-        for registro in registros:
-            if registro.tipo == 'Entrada':
-                entradas.append(registro.data_hora)
-            else:
-                if entradas:
-                    # calcula a diferença entre a última Entrada e essa saída
-                    delta = registro.data_hora - entradas[-1]
-                    deltaSegundos += (delta.total_seconds())  # converte para horas
-                    
-        horario_provavel_fim_turno = registros[0].data_hora + timedelta(seconds=deltaSegundos) + timedelta(hours=8) if entradas else ""
+        saidas = []
+        intervaloMinutos = 0
         
+        for registro in registros:
+            if registro.tipo == 'Saída':
+                saidas.append(registro.data_hora)
+            else:
+                if saidas:
+                    delta = registro.data_hora - saidas[-1]
+                    intervaloMinutos += (delta.total_seconds() /60)
+                elif entradas:
+                    intervaloMinutos += 0
+        
+        horario_provavel_fim_turno = registros[0].data_hora + timedelta(hours=8) + timedelta(minutes=intervaloMinutos) if registros else ""
         context = {'registros': registros, 'horario_provavel_fim_turno': horario_provavel_fim_turno,}
-
+        print(registros[0].data_hora + timedelta(hours=8) + timedelta(minutes=intervaloMinutos))
         return render(request, 'ponto.html', context)
