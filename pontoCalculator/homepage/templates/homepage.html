@@ -28,11 +28,17 @@
                         <a class="item" href="{% url 'logout' %}">Logout</a>
                         {% endif %}
                         {% if user.is_superuser %}
-                        <a class="item" href="{% url 'register' %}">Register</a>
+                        <a class="item" href="{% url 'register' %}">Cadastro</a>
                         {% endif %}
                         {% if user.is_authenticated %}
                         <a class="item" href="{% url 'ponto' %}">Ponto
                             Eletrônico</a>
+                        {% block pontoAdminActive %}
+                        <a class="item" href="{% url 'admin' %}">Exceções</a>
+                        {% endblock %}
+                        {% block dashboardActive %}
+                        <a class="item" href="{% url 'dashboard' %}">Dashboard</a>
+                        {% endblock %}
                         {% endif %}
                     </div>
                 </div>
