@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from .models import RegistroPonto
 from funcionario.models import CustomUser
 from .forms import RegistroPontoForm, RegistroPontoAdmin
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 
@@ -18,11 +19,15 @@ def ponto(request):
         end_of_day = timezone.make_aware(timezone.datetime(now.year, now.month, now.day, 23, 59, 59)) # obter a data e hora do final do dia atual
         if RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day)).exists():
             registros_do_dia_atual = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day))
+            ferias = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day), tipo='Férias')
         else:
             registros_do_dia_atual = None
+            ferias = None
         if request.method == 'POST':
             form = RegistroPontoForm(request.POST)
             if form.is_valid() and request.POST.get('action') == 'create':
+                if ferias:
+                    return HttpResponseForbidden("Você está de férias, divirta-se em outro lugar!")
                 registro = form.save(commit=False)
                 registro.funcionario = request.user
                 # registra o tipo oposto ao último.
