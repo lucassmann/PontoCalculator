@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Horas extras trabalhadas por {{ user }}</h1>
+  <p>No período de {{ date_start }} a {{ date_end }}.</p>
+  <p>Horas extras trabalhadas: {{ horas_extras }}</p>
+{% endblock %}
