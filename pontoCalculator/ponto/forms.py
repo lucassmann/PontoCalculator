@@ -10,6 +10,7 @@ class RegistroPontoForm(forms.ModelForm):
 
 
 class RegistroPontoAdmin(forms.ModelForm):
+    detalhes = forms.CharField(max_length=100, required=True, label='Justificativa')
     class Meta:
         model = RegistroPonto
         exclude = ('funcionario',)
