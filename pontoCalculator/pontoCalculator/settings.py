@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'funcionario',
     'homepage',
     'ponto',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
