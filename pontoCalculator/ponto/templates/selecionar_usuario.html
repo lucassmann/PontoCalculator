@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% block title %}Exceções{% endblock %}
+
+{% block homeActive %}
+<a class="item" href="{% url 'homepage' %}">Home</a>
+{% endblock %}
+
+{% block pontoAdminActive %}
+<a class="active item" href="{% url 'admin' %}">Exceções</a>
+{% endblock %}
+
 {% block content %}
     <h1>Selecione um usuário</h1>
     

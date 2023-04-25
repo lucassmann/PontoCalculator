@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% block title %}Dashboard{% endblock %}
+
+{% block homeActive %}
+<a class="item" href="{% url 'homepage' %}">Home</a>
+{% endblock %}
+{% block dashboardActive %}
+<a class="active item" href="{% url 'dashboard' %}">Dashboard</a>
+{% endblock %}
+
 {% block content %}
   <h1>Horas extras trabalhadas por {{ user }}</h1>
   <p>No período de {{ date_start }} a {{ date_end }}.</p>
