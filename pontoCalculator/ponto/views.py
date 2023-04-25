@@ -78,10 +78,11 @@ def adminRegistro(request):
 
             if form.is_valid() and request.POST.get('action') == 'create':
                 registro = form.save(commit=False)
-                registro.funcionario = funcionario_id
+                registro.funcionario = CustomUser.objects.get(id=funcionario_id)
                 # registra o tipo oposto ao último.
                 registro.save()
-                return redirect('admin')
+                url = reverse('admin_registro') + f'?user={funcionario_id}&date={selected_date_naive}'
+                return HttpResponseRedirect(url)
         else:
             form = RegistroPontoAdmin()
         if not registros_do_dia_atual:
