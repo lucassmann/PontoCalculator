@@ -17,7 +17,6 @@ def dashboard(request):
         user_id = request.POST.get('user_id')
         date_start = datetime.strptime(request.POST.get('date_start'), "%Y-%m-%d")
         date_end = datetime.strptime(request.POST.get('date_end'), "%Y-%m-%d")
-        print(user_id, date_start, date_end)
         try:
             user = CustomUser.objects.get(id=user_id)
         except CustomUser.DoesNotExist:
@@ -25,14 +24,7 @@ def dashboard(request):
             return redirect('dashboard')
         
         registros = RegistroPonto.objects.filter(funcionario=user, data_hora__date__range=[date_start, date_end])
-        horas_extras = calcular_horas_extras(registros)
-        saídas = registros.filter(tipo='Saída' or 'Exceção(saída)')
-        entradas = registros.filter(tipo='Entrada or Exceção(entrada)')
-        print(list(saídas))
-        print(list(entradas))
-        print(registros.count())
-        
-        
+        horas_extras = calcular_horas_extras(registros)      
         
         context = {
             'user': user,
