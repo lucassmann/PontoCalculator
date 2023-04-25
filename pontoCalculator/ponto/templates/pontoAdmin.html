@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Criar Registro de Ponto
+{% endblock %}
+
+{% block head%}
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+    />
+{% endblock %}
+
+{% block homeActive %}
+<a class="item" href="{% url 'homepage' %}">Home</a>
+{% endblock %}
+{% block pontoActive %}
+<a class="active item" href="{% url 'ponto' %}">Ponto Eletrônico</a>
+{% endblock %}
+
+{% block content %}
+<style>
+    .table-container {
+        margin-top: 3%;
+      }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .linha-entrada {
+        background-color: #A6F5A6;
+    }
+
+    .linha-saida {
+        background-color: #F5A6A6;
+    }
+
+    .novo-registro {
+        padding: 1%;
+        column-span: 2;
+    }
+    
+</style>
+    <div class="table-container">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Data/Hora</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros %}
+                <tr class="positve">
+                    <td>{{ registro.tipo }}</td>
+                    <td>{{ registro.data_hora }}</td>
+                    {% if registro.detalhes %}
+                    <td>{{ registro.detalhes}}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-top: 50px" class="ui container">
+        <h1 class="ui center aligned header">Exceção</h1>
+    <form method="post" class="ui form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="action" value="create" class="btn btn-primary">Registrar</button>
+      </form>
+{% endblock %}
