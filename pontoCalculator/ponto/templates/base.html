@@ -25,18 +25,15 @@
                         {% block homeActive %}
                         <a class="active item" href="{% url 'homepage' %}">Home</a>
                         {% endblock %}
-                        {% if not user.is_authenticated %}
-                        {% block loginActive %}
-                        <a class="item" href="{% url 'login' %}">Login</a>
-                        {% endblock %}
-                        {% else %}
-                        {% block logout %}
-                        <a class="item" href="{% url 'logout' %}">Logout</a>
+                        {% if user.is_authenticated %}
+                        {% block pontoActive %}
+                        <a class="item" href="{% url 'ponto' %}">Ponto
+                            Eletrônico</a>
                         {% endblock %}
                         {% endif %}
                         {% if user.is_superuser %}
                         {% block registerActive %}
-                        <a class="item" href="{% url 'register' %}">Cadastro</a>
+                        <a class="item" href="{% url 'register' %}">Cadastro<a>
                         {% endblock %}
                         {% block pontoAdminActive %}
                         <a class="item" href="{% url 'admin' %}">Exceções</a>
@@ -45,14 +42,21 @@
                         <a class="item" href="{% url 'dashboard' %}">Dashboard</a>
                         {% endblock %}
                         {% endif %}
-                        {% if user.is_authenticated %}
-                        {% block pontoActive %}
-                        <a class="item" href="{% url 'ponto' %}">Ponto
-                            Eletrônico</a>
+                        <div class="right item"></div>
+                        {% if not user.is_authenticated %}
+                        {% block loginActive %}
+                        <a class="ui inverted button" href="{% url 'login' %}">Log in</a>
+                        {% endblock %}
+                        {% else %}
+                        {% block logout %}
+                        <a class="ui inverted button" href="{% url 'logout' %}">Log out</a>
                         {% endblock %}
                         {% endif %}
+
+
                     </div>
                 </div>
+                {% block homeContent %}{% endblock %}
             </div>
         </div>
         {% block content %}{% endblock %}
