@@ -41,7 +41,7 @@ def dashboard(request):
         'users': users
     }
     
-    return render(request, 'selecionar_usuario.html', context)
+    return render(request, 'selecionar_usuario_data.html', context)
     
     
 def calcular_horas_extras(registros):
