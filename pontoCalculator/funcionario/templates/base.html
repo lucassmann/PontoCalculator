@@ -36,7 +36,13 @@
                         {% endif %}
                         {% if user.is_superuser %}
                         {% block registerActive %}
-                        <a class="item" href="{% url 'register' %}">Register</a>
+                        <a class="item" href="{% url 'register' %}">Cadastro<a>
+                        {% endblock %}
+                        {% block pontoAdminActive %}
+                        <a class="item" href="{% url 'admin' %}">Exceções</a>
+                        {% endblock %}
+                        {% block dashboardActive %}
+                        <a class="item" href="{% url 'dashboard' %}">Dashboard</a>
                         {% endblock %}
                         {% endif %}
                         {% if user.is_authenticated %}
