@@ -14,7 +14,7 @@ Register
 <a class="item" href="{% url 'homepage' %}">Home</a>
 {% endblock %}
 {% block registerActive %}
-<a class="active item" href="{% url 'register' %}">Register</a>
+<a class="active item" href="{% url 'register' %}">Cadastro</a>
 {% endblock %}
 {% block content %}
 <div style="margin-top: 50px" class="ui container">
@@ -23,7 +23,7 @@ Register
     <form class="ui form" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="ui blue button" type="submit">Register</button>
+        <button class="ui blue button" type="submit">Cadastro</button>
     </form>
 </div>
 
