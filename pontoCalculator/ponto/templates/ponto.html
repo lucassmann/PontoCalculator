@@ -54,19 +54,23 @@ Criar Registro de Ponto
                 <tr>
                     <th>Tipo</th>
                     <th>Data/Hora</th>
+                    <th>Detalhes</th>
                 </tr>
             </thead>
             <tbody>
                 {% for registro in registros %}
-                {% if forloop.counter|divisibleby:2 %}
+                {% if 'saída' in registro.tipo or 'Saída' in registro.tipo %}
                 <tr class="negative">
-                    <td>Saída</td>
+                    <td> {{ registro.tipo }}</td>
                     <td>{{ registro.data_hora }}</td>
                 </tr>
                 {% else %}
                 <tr class="positve">
-                    <td>Entrada</td>
+                    <td> {{registro.tipo }} </td>
                     <td>{{ registro.data_hora }}</td>
+                    {% if registro.detalhes %}
+                    <td>{{ registro.detalhes}}</td>
+                    {% endif %}
                 </tr>
                 {% endif %}
                 {% endfor %}
