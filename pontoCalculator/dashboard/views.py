@@ -27,7 +27,7 @@ def dashboard(request):
         horas_extras = calcular_horas_extras(registros)      
         
         context = {
-            'user': user,
+            'SelectedUser': user,
             'registros': registros,
             'horas_extras': horas_extras,
             'date_start': date_start.strftime("%d/%m/%Y"),
