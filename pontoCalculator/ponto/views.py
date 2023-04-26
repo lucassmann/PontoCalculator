@@ -10,14 +10,18 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+import pytz
 
 
 # Create your views here.
 @login_required
 def ponto(request):
-    now = timezone.now() # obter a data e hora atuais do timezone padrão
-    start_of_day = timezone.make_aware(timezone.datetime(now.year, now.month, now.day, 0, 0, 0)) # obter a data e hora do início do dia atual
-    end_of_day = timezone.make_aware(timezone.datetime(now.year, now.month, now.day, 23, 59, 59)) # obter a data e hora do final do dia atual
+    tz_br = pytz.timezone('America/Sao_Paulo')
+    now = datetime.now(tz_br) # obter a data e hora atuais do timezone padrão
+    start_of_day = timezone.make_aware(timezone.datetime(now.year, now.month, now.day, 0, 0, 0), tz_br) # obter a data e hora do início do dia atual
+    end_of_day = timezone.make_aware(timezone.datetime(now.year, now.month, now.day, 23, 59, 59), tz_br) # obter a data e hora do final do dia atual
+    
+    
     if RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day)).exists():
         registros_do_dia_atual = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day))
         ferias = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day), tipo='Férias')
