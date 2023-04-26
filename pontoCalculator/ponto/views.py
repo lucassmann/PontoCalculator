@@ -23,7 +23,7 @@ def ponto(request):
     
     
     if RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day)).exists():
-        registros_do_dia_atual = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day))
+        registros_do_dia_atual = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day)).order_by('data_hora')
         ferias = RegistroPonto.objects.filter(funcionario=request.user, data_hora__range=(start_of_day, end_of_day), tipo='Férias')
     else:
         registros_do_dia_atual = None
@@ -72,7 +72,7 @@ def adminRegistro(request):
         start_of_day = timezone.make_aware(timezone.datetime(selected_date_naive.year, selected_date_naive.month, selected_date_naive.day, 0, 0, 0)) # obter a data e hora do início do dia atual
         end_of_day = timezone.make_aware(timezone.datetime(selected_date_naive.year, selected_date_naive.month, selected_date_naive.day, 23, 59, 59)) # obter a data e hora do final do dia atual
         if RegistroPonto.objects.filter(funcionario=funcionario_id, data_hora__range=(start_of_day, end_of_day)).exists():
-            registros_do_dia_atual = RegistroPonto.objects.filter(funcionario=funcionario_id, data_hora__range=(start_of_day, end_of_day))
+            registros_do_dia_atual = RegistroPonto.objects.filter(funcionario=funcionario_id, data_hora__range=(start_of_day, end_of_day)).order_by('data_hora')
         else:
             registros_do_dia_atual = None
 
